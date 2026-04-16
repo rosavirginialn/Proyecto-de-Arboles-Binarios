@@ -6,9 +6,7 @@ bool es_apto_para_jefe(Miembro* m, bool incluir_carcel);
 
 Miembro* encontrar_actual_jefe(Miembro* aux);
 Miembro* buscar_primer_apto(Miembro* nodo, bool incluir_carcel);
-Miembro* encontrar_sucesor_por_hermanos(Miembro* jefe);
-Miembro* encontrar_sucesor_por_ancestros(Miembro* jefe);
-
+Miembro* buscar_sucesor_protocolo(Miembro* jefe, bool incluir_carcel);
 void reasignar_jefe(ArbolMafia& arbol);
 
 #endif

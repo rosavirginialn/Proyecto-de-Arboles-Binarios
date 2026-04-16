@@ -9,6 +9,17 @@
 using namespace std;
 
 /**
+ * @brief Limpia la terminal dependiendo del sistema operativo.
+ */
+void limpiarPantalla() {
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+}
+
+/**
  * @brief Interfaz visual del menú principal.
  */
 void mostrarMenu() {
@@ -38,7 +49,6 @@ int main() {
     string ruta = "../bin/datos.csv"; 
     int opcion = 0;
 
-    // Mensaje de inicio
     cout << "Iniciando terminal de control..." << endl;
 
     while (opcion != 6) {
@@ -50,11 +60,14 @@ int main() {
             continue;
         }
 
+        // Limpiamos la pantalla justo después de recibir la opción 
+        // para que el resultado del "case" se vea limpio arriba.
+        limpiarPantalla();
+
         switch (opcion) {
             case 1: // CARGAR DATOS
                 if (cargarDesdeCSV(ruta, familia)) {
                     cout << "\n>>> EXITO: Base de datos sincronizada desde " << ruta << endl;
-                    // Al cargar, verificamos si el jefe actual sigue siendo apto
                     reasignar_jefe(familia);
                 } else {
                     cout << "\n>>> [ERROR]: Archivo no encontrado en " << ruta << endl;
@@ -96,8 +109,6 @@ int main() {
                     cout << "Genero (H/M): "; cin >> gen;
 
                     familia.editar_miembro(id, n, ln, edad, gen);
-                    
-                    // Verificamos si los cambios (especialmente la edad) alteran la jefatura
                     reasignar_jefe(familia);
                     cout << ">>> Perfil actualizado correctamente." << endl;
                 } else {
@@ -126,7 +137,6 @@ int main() {
                         break;
                     }
 
-                    // Disparar lógica de sucesión si el afectado era el jefe o el siguiente en línea
                     reasignar_jefe(familia);
                 } else {
                     cout << ">>> [ERROR]: El ID especificado no existe." << endl;

@@ -35,7 +35,7 @@ void limpiarBuffer() {
 
 int main() {
     ArbolMafia familia;
-    string ruta = "bin/datos.csv"; 
+    string ruta = "../bin/datos.csv"; 
     int opcion = 0;
 
     // Mensaje de inicio
